@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--名称空间-->
+<mapper namespace="stukk.mapper.SearchDiseaseMapper">
+
+    <select id="selectByDisease" resultType="stukk.Pojo.SearchDisease">
+    select mirna.id id,rnaname,title,doi,nlm ,pt ,writer ,year,abstract abs from thesis,mirna,disease_mirna_thesis dmt where
+thesis.id = dmt.thsid  and mirna.id = dmt.mirid and dmt.disid in (select id from disease where disname like #{disname})
+  </select>
+</mapper>
