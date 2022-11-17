@@ -18,7 +18,7 @@
                     sortable>
             </el-table-column>
             <el-table-column
-                    prop="disname"
+                    prop="diseaseName"
                     label="疾病名称">
             </el-table-column>
             <el-table-column
@@ -58,11 +58,7 @@
                     width="30%">
                 <el-form :model="form" label-width="120px">
                     <el-form-item label="疾病名称">
-                        <el-input v-model="form.disname" style="width: 80%"></el-input>
-                    </el-form-item>
-
-                    <el-form-item label="疾病描述">
-                        <el-input v-model="form.description" style="width: 80%;" ></el-input>
+                        <el-input v-model="form.diseaseName" style="width: 80%"></el-input>
                     </el-form-item>
                 </el-form>
                 <template #footer>
@@ -100,7 +96,7 @@
                 total: 0,
                 tableData :[
                     {
-                        id: 1, disname: '新冠', description: '是个勾巴'
+                        id: 1, diseaseName: '新冠'
                     }
                 ]
             }

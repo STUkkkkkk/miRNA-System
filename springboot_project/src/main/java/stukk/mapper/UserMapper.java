@@ -10,5 +10,11 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
 
 
+    List<User> GetByBlogCount(Long id);
+
     List<User> findPage(String username, Integer first,Integer second);
+
+    User getOne(String username, String password);
+
+    boolean updateByEmail(String email, String password);
 }

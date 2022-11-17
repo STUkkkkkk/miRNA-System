@@ -1,12 +1,36 @@
 server:
   port: 9999
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:mysql://localhost:3307/BigProject?useSSl=false
+    url: jdbc:mysql://localhost:3307/BigProject?useSSl=false&&allowMultiQueries=true&useAffectedRows=true
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+
+  mail:
+    protocol: smtp #邮件协议
+    host: smtp.163.com
+    port: 25 #接口
+    username: stukk123@163.com  #发件邮箱地址
+    password:  GPTGVELEJIHTLSLE  #授权码
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #��ӡSQL��־������̨
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

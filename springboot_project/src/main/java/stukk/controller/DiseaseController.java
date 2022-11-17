@@ -16,11 +16,16 @@ public class DiseaseController {
 
     @Autowired
     DiseaseService diseaseService;
-
+//分页查询
     @GetMapping
     public Result<?> findPage(@RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value="pageSize") Integer pageSize, @RequestParam(value = "search") String search){
-        IPage<Disease> page = diseaseService.selectPage(new Page<>(pageNum,pageSize),Wrappers.<Disease>lambdaQuery().like(Disease::getDisname,search));
+        IPage<Disease> page = diseaseService.selectPage(new Page<>(pageNum,pageSize),Wrappers.<Disease>lambdaQuery().like(Disease::getDiseaseName,search));
         return Result.success(page);
+    }
+
+    @GetMapping ("/GetAll")
+    public Result GetAll(){
+        return diseaseService.getAll();
     }
 
     @PostMapping

@@ -18,7 +18,7 @@
                     sortable>
             </el-table-column>
             <el-table-column
-                    prop="rnaname"
+                    prop="mirnaName"
                     label="MiRNA名称">
             </el-table-column>
             <el-table-column
@@ -58,7 +58,7 @@
                     width="30%">
                 <el-form :model="form" label-width="120px">
                     <el-form-item label="MiRNA名称">
-                        <el-input v-model="form.rnaname" style="width: 80%"></el-input>
+                        <el-input v-model="form.mirnaName" style="width: 80%"></el-input>
                     </el-form-item>
 
                     <el-form-item label="基因描述">
@@ -100,7 +100,7 @@
                 total: 0,
                 tableData :[
                     {
-                        id: 1, rnaname: 'MIRNA', description: '是个勾巴'
+                        id: 1, mirnaName: 'MIRNA'
                     }
                 ]
             }

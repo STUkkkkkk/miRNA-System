@@ -84,11 +84,16 @@
             User
         },
         created() {
+            let king = localStorage.getItem("king")
+            let people = localStorage.getItem("user")
+            if(king != null || people != null){
+                this.$router.push("/index");
+            }
             this.load();
         },
         methods:{
             load(){
-                let js = sessionStorage.getItem("king");
+                let js = localStorage.getItem("king");
                 if(!js){
                     this.nickname = "请登录";
                 }
@@ -98,7 +103,7 @@
             },
             Leave(){
                 this.$router.push("/login");
-                sessionStorage.removeItem("king");
+                localStorage.removeItem("king");
             },
             connect(){
                 this.isconnect = true;

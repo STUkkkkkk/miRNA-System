@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stukk.mapper.SearchMirnaMapper">
+
+    <resultMap id="cnt" type="java.lang.Integer"></resultMap>
+    <resultMap id="ArticleMap" type="stukk.Pojo.Article"></resultMap>
+    <select id="GetByMirna" resultMap="ArticleMap,cnt">
+
+        select SQL_CALC_FOUND_ROWS	pmid,title,type,authors,doi,keywords,library,abs,date from tb_article where pmid in (select pmid from tb_relationship where mirna_id = (
+            select id from tb_mirna where mirna_name = #{mirnaName})) limit #{num1},#{num2};
+        select FOUND_ROWS();
+
+    </select>
+</mapper>

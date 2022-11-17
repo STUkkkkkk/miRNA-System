@@ -17,13 +17,18 @@ public class MirnaController {
 
     @GetMapping
     public Result<?> selectPage(@RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "search") String search){
-        Page<Mirna> ans = mirnaService.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Mirna>lambdaQuery().like(Mirna::getRnaname,search));
+        Page<Mirna> ans = mirnaService.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Mirna>lambdaQuery().like(Mirna::getMirnaName,search));
         if(ans == null){
             return Result.error("111","查询失败");
         }
         else{
             return Result.success(ans);
         }
+    }
+
+    @GetMapping("GetAll")
+    public Result GetAll(){
+        return mirnaService.getAll();
     }
 
 

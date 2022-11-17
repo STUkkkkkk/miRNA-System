@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import stukk.Pojo.User;
 import stukk.config.Result;
+import stukk.config.UserHolder;
 import stukk.service.UserService;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,7 @@ public class UserController {
 
     @PostMapping
     public Result<?> save(@RequestBody User user){
-        User ans = userService.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername,user.getUsername()));
+        User ans = userService.selectOne(Wrappers.<User>lambdaQuery().eq(User::getEmail,user.getEmail()));
         if(ans == null){
             boolean isOk = userService.save(user);
             if(isOk){
@@ -31,7 +33,7 @@ public class UserController {
             }
         }
         else{
-            return Result.error("504","注册失败，因为你他妈用户名重复了");
+            return Result.error("504","注册失败，邮箱已被注册");
         }
 
     }
@@ -45,7 +47,8 @@ public class UserController {
     @PutMapping
     public Result<?> update(@RequestBody User user){
         if(userService.update(user)){
-            return Result.success();
+
+            return Result.success(user);
         }
         else{
             return Result.error("500","更新失败");
@@ -64,15 +67,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<?> Login(@RequestBody User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
-        User ans = userService.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername,username).eq(User::getPassword,password));
-        if(ans == null){
-            return Result.error("101","登陆失败，请进行注册");
-        }
-        else{
-            return Result.success(ans);
-        }
+        return userService.login(user);
     }
 
     @PostMapping("/batch")
@@ -85,5 +80,21 @@ public class UserController {
         }
     }
 
+    //获取用户信息
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable("id") Long id){
+        return userService.getById(id);
+    }
+
+
+    @PostMapping("/reset")
+    public Result ResetPassword(@RequestBody User user){
+        return userService.reset(user);
+    }
+
+    @GetMapping("/ByBlogCount/{id}")
+    public Result GetByBlogCount(@PathVariable Long id){
+        return userService.GetByBlogCount(id);
+    }
 
 }

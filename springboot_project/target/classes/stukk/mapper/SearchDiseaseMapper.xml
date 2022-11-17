@@ -6,8 +6,12 @@
 <!--名称空间-->
 <mapper namespace="stukk.mapper.SearchDiseaseMapper">
 
-    <select id="selectByDisease" resultType="stukk.Pojo.SearchDisease">
-    select mirna.id id,rnaname,title,doi,nlm ,pt ,writer ,year,abstract abs from thesis,mirna,disease_mirna_thesis dmt where
-thesis.id = dmt.thsid  and mirna.id = dmt.mirid and dmt.disid in (select id from disease where disname like #{disname})
+    <resultMap id="ok" type="int"/>
+    <resultMap id="Articles" type="stukk.Pojo.Article"/>
+
+    <select id="selectByDisease" resultMap="Articles,ok">
+        select SQL_CALC_FOUND_ROWS	pmid,title,type,authors,doi,keywords,library,abs,date from tb_article where pmid in (select pmid from tb_relationship where disease_id = (
+            select id from tb_disease where disease_name = #{diseaseName})) limit #{num1},#{num2};
+        select FOUND_ROWS();
   </select>
 </mapper>

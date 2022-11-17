@@ -20,9 +20,8 @@ public class SearchDiseaseController {
 
 
     @GetMapping
-    public Result<?> selectByDisease(@RequestParam(value = "disease") String disease){
-        List<SearchDisease> ans = searchService.selectByDisease("%"+disease+"%");
-        return Result.success(ans);
+    public Result<?> selectByDisease(@RequestParam String disease,@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+        return searchService.selectByDisease(disease,pageNum,pageSize);
     }
 
 }

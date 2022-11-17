@@ -135,7 +135,8 @@ export default {
   },
   methods:{
     load(){
-      request.get("/user",{params: {pageNum: this.currentPage,
+      request.get("/user",{
+        params: {pageNum: this.currentPage,
           pageSize: this.pageSize,
           search: this.search},
       }).then((res) => {

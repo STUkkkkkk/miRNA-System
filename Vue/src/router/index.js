@@ -11,17 +11,18 @@ import About from "../views/About";
 import Test from "../views/Test";
 import SearchDisease from "../views/SearchDisease";
 import Article from "../views/Article";
+import Layout_User from "../../layout/Layout_User";
 const routes = [
   {
     path: '/',
     name: 'Layout',
     component: Layout,
-    redirect: '/user',
+    redirect: '/tourist',
     children:[
         {
          path: '/user',
          name: 'User',
-         component: ()=>import("../views/User")
+         component: ()=>import("../views/User"),
         },
         {
         path: '/disease',
@@ -41,7 +42,7 @@ const routes = [
         {
             path: '/article',
             name: 'Article',
-            component: ()=>import("../views/Article")
+            component: ()=>import("../views/Article"),
         },
     ]
   },
@@ -55,6 +56,12 @@ const routes = [
     name: 'Register',
     component: ()=>import("../views/Register")
   },
+    {
+      path: '/resetPassword',
+      name: 'ResetPassword' ,
+      component: ()=> import("../views/ResetPassword")
+    },
+
     {
         path: '/index',
         name: 'Index',
@@ -78,7 +85,73 @@ const routes = [
     {
         path: '/searchDisease',
         name: 'SearchDisease',
-        component: ()=>import("../views/SearchDisease")
+        component: ()=>import("../views/SearchDisease"),
+        meta: {
+            keepAlive : true, //缓存
+        }
+    },
+    {
+        path: '/searchMirna',
+        name: 'SearchMirna',
+        component: ()=>import("../views/SearchMirna"),
+        meta: {
+            keepAlive : true, //缓存
+        }
+    },
+    {
+        path: '/community',
+        name: 'Community',
+        component: ()=>import("../views/Community"),
+    },
+    {
+      path: '/articleInformation',
+      name: 'ArticleInformation',
+      component: ()=>import("../views/ArticleInformation")
+    },
+    {
+        path: '/blog_info',
+        name: 'Blog_info',
+        component: ()=>import("../views/blog/Blog_info")
+    },
+
+    {
+        path: '/user_layout',
+        name: 'Layout_User',
+        component: Layout_User,
+        children: [
+            {
+                path: '/user_info',
+                name: 'User_Info',
+                component: ()=>import("../views/User_Info"),
+                meta: {
+                    index:0,
+                }
+            },
+            {
+              path: '/search_info',
+              name: 'Search_Info',
+              component: ()=>import("../views/Search_Info"),
+                meta: {
+                    index:1,
+                }
+            },
+            {
+                path: '/buy_info',
+                name: 'Buy_Info',
+                component: ()=>import("../views/Buy_Info"),
+                meta: {
+                    index:2,
+                }
+            },
+            {
+                path: '/send_Blog',
+                name: 'Send_Blog',
+                component: ()=>import("../views/Send_Blog"),
+                meta: {
+                    index:3,
+                }
+            },
+        ]
     }
 ]
 

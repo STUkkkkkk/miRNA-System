@@ -5,8 +5,17 @@
 
 <!--名称空间-->
 <mapper namespace="stukk.mapper.UserMapper">
+    <update id="updateByEmail">
+        update user set password = #{password} where email = #{email};
+    </update>
 
     <select id="findPage" resultType="stukk.Pojo.User">
         select * from user limit #{first}, #{second}
+    </select>
+    <select id="getOne" resultType="stukk.Pojo.User">
+        select * from user where (username = #{username} or email = #{username}) and password = #{password};
+    </select>
+    <select id="GetByBlogCount" resultType="stukk.Pojo.User">
+        select * from user order by blog_count desc limit 0,#{id};
     </select>
 </mapper>

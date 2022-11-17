@@ -1,7 +1,7 @@
 <template>
     <div style="height: 50px;line-height: 50px; border-bottom: 1px solid #cccccc ;display: flex">
         <div style="width: 200px; padding-left: 25px; font-weight: bold ; color: aqua">后台管理</div>
-        <div style="width: 600px; padding-left: 500px; font-weight: bold; color: darkcyan; cursor: pointer" @click="this.$router.push('/index')">MiRNA系统</div>
+        <div style="width: 600px; padding-left: 500px; font-weight: bold; color: crimson; font-family: 楷体; cursor: pointer" @click="this.$router.push('/index')">坤坤网</div>
         <div style="flex: 1px"></div>
         <div style="width: 100px; padding-right: 25px">
             <el-dropdown>
@@ -30,7 +30,7 @@
           }
         },
         created() {
-            let json = sessionStorage.getItem("user");
+            let json = localStorage.getItem("user");
             if(json)
             this.nickname = JSON.parse(json).nickname;
         },
@@ -39,7 +39,7 @@
         },
         methods:{
             Leave(){
-                sessionStorage.removeItem("user")
+                localStorage.removeItem("user")
                 this.$router.push("/login")
             }
         }
@@ -55,4 +55,5 @@
         align-items: center;
         padding-top: 15px;
     }
+
 </style>
